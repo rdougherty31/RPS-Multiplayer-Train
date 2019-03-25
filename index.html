@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Schedule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/reset.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/style.css">
+
+</head>
+<body>
+
+<section id="schedule">
+    <div id="tableHeading" class="heading">Current Train Schedule</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Train Name</th>
+                <th>Destination</th>
+                <th>Frequency (min)</th>
+                <th>Next Arrival</th>
+                <th>Minutes Away</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</section>
+
+<section id="newTrain">
+    <div id="formHeading" class="heading">Add Train</div>
+    <form action="">
+    <div class="formRow">
+        <label for="name" class="name">Train Name</label>
+        <input id="name" class="name" type="text"><br>
+    </div>
+    <div class="formRow">
+        <label for="dest" class="dest">Destination</label>
+        <input id="dest" class="dest" type="text"><br>
+    </div>
+    <div class="formRow">
+        <label for="firstTime" class="firstTime">First Train Time (HH:mm - military time)</label>
+        <input type="text" id="firstTime" class="firstTime"><br>
+    </div>
+    <div class="formRow">
+        <label for="frequency" class="frequency">Frequency (min)</label>
+        <input type="text" id="frequency" class="frequency"><br>
+    </div>
+    <button id="submit">Submit</button>
+    </form>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<script src="./assets/game.js"></script>
+</body>
+</html>
