@@ -1,3 +1,4 @@
+//firebase configuration & initialization
 var config = {
     apiKey: "",
     authDomain: "sample-95e09.firebaseapp.com",
@@ -7,7 +8,7 @@ var config = {
     messagingSenderId: "739157600074"
   };
 firebase.initializeApp(config);
-
+//declare variables
 var database = firebase.database();
 var name;
 var dest;
@@ -18,7 +19,7 @@ var freqMins;
 var timeDiff;
 var minAway;
 var nextTrain;
-
+//submit button clicked, train info pushed to firebase
 $("#submit").click(function(event) {
     event.preventDefault();
     name = $("#name").val().trim();
@@ -34,7 +35,6 @@ $("#submit").click(function(event) {
     $("input").val("");
 });
 database.ref().on("child_added", function(childSnapshot) {
-    console.log(childSnapshot.val());
     //create table elements
     var trainRow = $("<tr>");
     var nameTD = $("<td>");
@@ -46,22 +46,18 @@ database.ref().on("child_added", function(childSnapshot) {
     var trainMin = parseInt(childSnapshot.val().firstTime.charAt(2)+childSnapshot.val().firstTime.charAt(3));
     var currentHour = parseInt(moment().format("HH"));
     var currentMin = parseInt(moment().format("mm"));
-    console.log(trainHour);
-    console.log(typeof trainHour);
     //assign variables used to display table data
     firstTimeMins = parseInt(childSnapshot.val().firstTime);
     freqMins = parseInt(childSnapshot.val().frequency);
     timeDiff = moment().diff(moment(firstTimeMins),"minutes");
     minAway = freqMins - (timeDiff % freqMins);
+    //check if train has started yet today
     if (trainHour < currentHour) {
         nextTrain = moment().add(minAway,"minutes").format("HH:mm");
-        console.log("first if: "+nextTrain);
     } else if (trainHour === currentHour && trainMin < currentMin) {
         nextTrain = moment().add(minAway,"minutes").format("HH:mm");         
-        console.log("second if: "+nextTrain);
     } else {
         nextTrain = childSnapshot.val().firstTime;
-        console.log("else: "+nextTrain);
     }
     //add classes & text then append table data & entire row
     trainRow.addClass("trainRow");
